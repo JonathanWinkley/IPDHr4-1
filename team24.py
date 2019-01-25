@@ -20,25 +20,27 @@ def move(my_history, their_history, my_score, their_score):
     Returns 'c' or 'b'. 
     '''
     if len(my_history) == 0:
-        return 'c' #if first turn collude
+        return 'c' 
     else:
-        #set default values
         weight = 0 
         betrays = 0
         their_length = 0
         for round in range(len(their_history)):
             if their_history[round] == 'b':
-                betrays += 1 #add to variable if for each time they have betrayed if ever
-            their_length += 1 #keeps track of how long their_history is
-        weight = int((betrays/their_length)*100) #calculates weight as an int
-        if their_length <= 10:
-            weight -= 50 #if first ten turns subtract 50 from weight
-        if weight < 0:
-            weight = 0 #makes sure weight is not below 0
-        if weight >= random.randint(1, 100): #decides wether to betray or collude
-            return 'b'
+                betrays += 1
+            their_length += 1
+        weight = int((betrays/their_length)*100)
+        
+        if their_history[-1] == 'b':
+            if weight <= random.randint(0, 99):
+                return 'b'
+            else:
+                return 'c'
         else:
-            return 'c'
+            if weight >= random.randint(1, 100):
+                return 'b'
+            else:
+                return 'c'
     
 def test_move(my_history, their_history, my_score, their_score, result):
     '''calls move(my_history, their_history, my_score, their_score)
