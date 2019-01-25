@@ -7,8 +7,8 @@
 ####
 
 team_name = 'Jonathan Winkleys Team' # Only 10 chars displayed.
-strategy_name = 'Weighted Betray'
-strategy_description = 'Start with colluding. After that turn their history into a percent to determine if choosing c or b'
+strategy_name = 'Weighted Betray V2'
+strategy_description = 'Start with colluding. After that turn their history into a percent to determine if choosing c or b, if betrayed last turn weighted more towards betraying'
 
 import random
 
