@@ -5,14 +5,15 @@
 #     strategy_description: a string
 #     move: A function that returns 'c' or 'b'
 ####
+from importlib import reload
 
-team_name = 'Bradford Pratts Team' # Only 10 chars displayed.
-strategy_name = 'Collude, Recompense, Backstab'
-strategy_description = '''I plan to do a strategy similar to 4 in which 
-I collude the first turn and every single turn after that. BUT, if the 
-other player decides to betray, then I will betray them for the next 5 turns. 
-And if it EVER happens, I plan to make one betrayal on the 200th round.
-'''
+import random
+
+import os.path
+
+team_name = 'Greg Holstens Team' # Only 10 chars displayed.
+strategy_name = 'Trust gaining Backstabber'
+strategy_description = 'colludes 5 times and then betray the rest'
     
 def move(my_history, their_history, my_score, their_score):
     ''' Arguments accepted: my_history, their_history are strings.
@@ -30,16 +31,12 @@ def move(my_history, their_history, my_score, their_score):
     # Analyze my_history and their_history and/or my_score and their_score.
     # Decide whether to return 'c' or 'b'.
     
-    if len(my_history)==0:
-        return 'c'
-    elif 'b' in their_history or len(their_history)>199:
-        return 'b'
-    elif 'b' in their_history[-5:]:
-        return 'b'
+    if len(my_history ) < 5:
+        return'c'
     else:
-        return 'c'
-        
+        return'b'
 
+    
 def test_move(my_history, their_history, my_score, their_score, result):
     '''calls move(my_history, their_history, my_score, their_score)
     from this module. Prints error if return value != result.
@@ -64,7 +61,7 @@ if __name__ == '__main__':
               my_score=0,
               their_score=0,
               result='b'):
-        print ('Test passed')
+        print('Test passed')
      # Test 2: Continue betraying if they collude despite being betrayed.
     test_move(my_history='bbb',
               their_history='ccc', 
@@ -77,4 +74,3 @@ if __name__ == '__main__':
               my_score=0, 
               their_score=0,
               result='b')             
-              
